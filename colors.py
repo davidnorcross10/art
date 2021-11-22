@@ -38,8 +38,25 @@ def colorDistanceArray(colorList):
 
 def sortColors(colorList):
     distanceArray = colorDistanceArray(colorList)
-    sortedColorList = solveTSP(distanceArray,0)
+    sortedColorList = [colorList[i] for i in solveTSP(distanceArray,0)]
     return sortedColorList
+
+def fullSpectrum(colorList,stepCount):
+    sortedColorList = sortColors(colorList)
+    sortedColorList.append(sortedColorList[0])
+    spectrumColorList = []
+    for i in range(len(sortedColorList)-1):
+        spectrumColorList.extend(colorSpread(sortedColorList[i],sortedColorList[i+1],stepCount))
+    return spectrumColorList
+
+def whiteish(color,threshold):
+    colorRGB = hex_to_rgb(color)
+    if colorDistance(colorRGB,(255,255,255)) <= threshold:
+        return True
+    else:
+        return False
+
+# print(whiteish("#fdfdfd",5))
 
 # colorList = [(1,2,3),(50,30,20),(100,120,40),(240,200,50),(240,203,56),(120,120,230)]
 # arr = colorDistanceArray(colorList)

@@ -20,7 +20,7 @@ def solveTSP(arr,d):
 
         distanceSum += lowestValue[1]
         rowNum = lowestValue[0]
-
-    distanceSum += arr[rowNum][0]
+    visitedIndices.append(rowNum)
+    # distanceSum += arr[rowNum][0]
     
     return visitedIndices
